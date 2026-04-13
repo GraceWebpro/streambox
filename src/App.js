@@ -20,6 +20,7 @@ import Terms from "./components/legal/Terms";
 import CookiesPolicy from "./components/legal/Cookies";
 import Refund from "./components/legal/Refund";
 import MovieDetails from "./pages/MovieDetails";
+import GenrePage from "./pages/GenrePage";
 
 function App() {
 
@@ -63,7 +64,9 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/order-success" element={<OrderSuccess />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
-
+          <Route path="/genre/:name" element={<GenrePage />} />
+          <Route path="/movies" element={<GenrePage />} />
+          
           <Route path="*" element={<NotFound />} />
 
           {/* Legal routes */}

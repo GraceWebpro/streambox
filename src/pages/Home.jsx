@@ -18,6 +18,7 @@ import RecentlyWatched from '../components/sections/Recent'
 import PopularDownloads from '../components/sections/Popular'
 import Genres from '../components/sections/Genres'
 import TopRated from '../components/sections/TopRated'
+import FeaturedBanner from '../components/sections/Featured'
 
 function Home() {
   const location = useLocation();
@@ -56,15 +57,24 @@ function Home() {
         <meta property="og:image" content="/preview.png" />
       </Helmet>
       <main>
-        <Hero />
-        <TrendingRow movies={demoMovies} />
-        <Genres />
-        <LatestUploads movies={demoMovies} />
-        <RecentlyWatched />
-        <PopularDownloads movies={demoMovies} />
-        <TopRated movies={demoMovies} />
-       
-      </main>
+  <Hero />
+
+  <TrendingRow movies={demoMovies} />
+
+  <LatestUploads movies={demoMovies} />
+
+  <PopularDownloads movies={demoMovies} />
+
+  <TopRated movies={demoMovies} />
+
+  {/* 🎬 FEATURED BANNER (ADD THIS) */}
+  <FeaturedBanner />
+
+  <Genres />
+
+  {/* 👤 PERSONALIZED (MOVE DOWN) */}
+  <RecentlyWatched />
+</main>
     </div>
   )
 }

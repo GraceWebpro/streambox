@@ -129,9 +129,9 @@ export default function Navbar() {
             <SearchBar />
 
             {/* SIGN IN */}
-            <button className="hidden lgx:block bg-gradient-main hover:bg-gradient-hover px-6 py-3 rounded-xl font-medium shadow-glow transition">
+            <Link to='/movies'><button className="hidden lgx:block bg-gradient-main hover:bg-gradient-hover px-6 py-3 rounded-xl font-medium shadow-glow transition">
               🎬 Movies
-            </button>
+            </button></Link>
 
             {/* MOBILE MENU BUTTON */}
             <button
@@ -182,9 +182,9 @@ export default function Navbar() {
             );
           })}
 
-            <button className="bg-gradient-main hover:bg-gradient-hover text-left text-white px-6 py-3 rounded-xl font-medium shadow-glow transition">
+            <Link to='/movies'><button className="bg-gradient-main hover:bg-gradient-hover text-left text-white px-6 py-3 rounded-xl font-medium shadow-glow transition">
               🎬 Movies
-            </button>
+            </button></Link>
 
         </div>
       </div>

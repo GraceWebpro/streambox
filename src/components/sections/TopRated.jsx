@@ -8,13 +8,13 @@ export default function TopRated({ movies = [] }) {
             ⭐ Top Rated
           </h2>
   
-          <button className="text-sm text-primary hover:text-primaryHover">
+          {/* <button className="text-sm text-textSecondary hover:text-primaryHover">
             View All
-          </button>
+          </button> */}
         </div>
   
         {/* Row */}
-        <div className="flex gap-5 overflow-x-auto scrollbar-hide pb-2">
+        <div className="flex gap-5 overflow-x-auto scrollbar-hide no-scrollbar pb-2">
   
           {movies.map((movie, index) => (
             <div

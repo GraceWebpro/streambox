@@ -16,6 +16,28 @@ const movies = [
     genre: "Action, Thriller",
     description: "A high-stakes rescue mission turns into a relentless battle for survival.",
     trailer: "https://www.w3schools.com/html/mov_bbb.mp4",
+
+    // 🆕 NEW FIELDS
+    director: "Sam Hargrave",
+    language: "English",
+    releaseDate: "2024-06-10",
+    ageRating: "16+",
+    views: "12K",
+    downloadsCount: "3K",
+
+    cast: [
+      {
+        name: "Chris Hemsworth",
+        role: "Tyler Rake",
+        image: "https://randomuser.me/api/portraits/men/32.jpg",
+      },
+      {
+        name: "Golshifteh Farahani",
+        role: "Nik",
+        image: "https://randomuser.me/api/portraits/women/44.jpg",
+      },
+    ],
+
     downloads: [
       { quality: "480p", size: "500MB", link: "#" },
       { quality: "720p", size: "900MB", link: "#" },
@@ -68,15 +90,44 @@ export default function MovieDetails() {
   const { id } = useParams();
   const [showTrailer, setShowTrailer] = useState(false);
   const [selectedSeason, setSelectedSeason] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [watchlist, setWatchlist] = useState([]);
 
   const movie = movies.find((m) => m.id === id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+
+    setTimeout(() => setLoading(false), 500);
+
+    const saved = JSON.parse(localStorage.getItem("watchlist")) || [];
+    setWatchlist(saved);
+  }, [id]);
+
+  const toggleWatchlist = () => {
+    let updated;
+
+    if (watchlist.includes(movie.id)) {
+      updated = watchlist.filter((i) => i !== movie.id);
+    } else {
+      updated = [...watchlist, movie.id];
+    }
+
+    setWatchlist(updated);
+    localStorage.setItem("watchlist", JSON.stringify(updated));
+  };
+
+  if (loading) {
+    return (
+      <div className="p-10 animate-pulse">
+        <div className="h-[60vh] bg-white/10 rounded-xl"></div>
+        <div className="h-6 bg-white/10 mt-4 w-1/2"></div>
+      </div>
+    );
+  }
 
   if (!movie) {
-    return <div className="text-white p-10">Loading...</div>;
+    return <div className="text-white p-10">Movie not found</div>;
   }
 
   return (
@@ -107,6 +158,8 @@ export default function MovieDetails() {
             <span>⭐ {movie.rating}</span>
             <span>{movie.year}</span>
             <span>{movie.duration}</span>
+            <span>🔥 {movie.views}</span>
+            <span>⬇ {movie.downloadsCount}</span>
           </div>
 
           <div className="flex gap-3">
@@ -122,6 +175,14 @@ export default function MovieDetails() {
               ⬇ Download
             </button>
 
+            {/* <button
+              onClick={toggleWatchlist}
+              className="bg-primary px-5 py-3 rounded-lg"
+            >
+              {watchlist.includes(movie.id) ? "✓ Saved" : "+ Watchlist"}
+            </button> */}
+
+
           </div>
         </div>
       </div>
@@ -136,6 +197,21 @@ export default function MovieDetails() {
             {movie.description}
           </p>
 
+          {/* 🎭 CAST */}
+          <h2 className="text-xl mt-8 mb-3">Cast</h2>
+          <div className="flex gap-4 overflow-x-auto">
+            {movie.cast.map((c, i) => (
+              <div key={i} className="min-w-[100px] text-center">
+                <img
+                  src={c.image}
+                  className="w-20 h-20 rounded-full object-cover mx-auto"
+                />
+                <p className="text-sm mt-2">{c.name}</p>
+                <p className="text-xs text-gray-400">{c.role}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
 
         
@@ -148,7 +224,7 @@ export default function MovieDetails() {
           </div>
           <div>
             <span className="text-textMuted text-sm">Release</span>
-            <p>{movie.year}</p>
+            <p>{movie.releaseDate}</p>
           </div>
           <div>
             <span className="text-textMuted text-sm">Duration</span>
