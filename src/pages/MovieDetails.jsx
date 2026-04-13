@@ -152,7 +152,7 @@ export default function MovieDetails() {
           </h1>
 
           <div className="flex flex-wrap gap-3 text-sm text-textSecondary mb-4">
-            <span className="bg-primary px-2 py-1 rounded text-xs">
+            <span className="bg-primary px-2 py-1 rounded text-xs text-white">
               {movie.quality}
             </span>
             <span>⭐ {movie.rating}</span>
